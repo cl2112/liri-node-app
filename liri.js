@@ -2,20 +2,15 @@
 const keys = require("./keys.js");
 const Twitter = require("twitter");
 
-//
+// Input Variables
+var command = process.argv[2];
+
+
+// Twitter Variables
 const consumerKey = keys.twitterKeys.consumer_key;
 const consumerSecret = keys.twitterKeys.consumer_secret;
 const accessKey = keys.twitterKeys.access_token_key;
 const accessSecret = keys.twitterKeys.access_token_secret;
-
-// console.log(consumerKey);
-// console.log(consumerSecret);
-// console.log(accessKey);
-// console.log(accessSecret);
-
-
-var command = process.argv[2];
-
 
 var client = new Twitter({
   consumer_key: consumerKey,
@@ -23,6 +18,7 @@ var client = new Twitter({
   access_token_key: accessKey,
   access_token_secret: accessSecret
 });
+
 
 
 switch (command) {
