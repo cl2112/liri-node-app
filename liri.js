@@ -1,9 +1,12 @@
 // Requires
 const keys = require("./keys.js");
 const Twitter = require("twitter");
+const spotify = require('spotify');
 
 // Input Variables
 var command = process.argv[2];
+var param1 = process.argv[3];
+var param2 = process.argv[4];
 
 
 // Twitter Variables
@@ -26,7 +29,7 @@ switch (command) {
 		myTweets();
 		break;
 	case "spotify-this-song":
-		spotify();
+		spotifyThis(param1,param2);
 		break;
 	case "movie-this":
 		movie();
@@ -52,12 +55,47 @@ function myTweets() {
  			var text = tweets[i].text;
 
  			console.log("  ");
- 			console.log("-----------------------");
+ 			console.log("---------------------------------------------------------------");
 			console.log(name);
 			console.log(text);
-			console.log("=======================");
+			console.log("===============================================================");
   		}  
 	//console.log(tweets);  // The favorites. 
 	//console.log(response);  // Raw response object. 
 	});
 };
+
+
+
+function spotifyThis(param1) {
+	if (param1 === undefined){
+		param1 = "The Sign Ace of Base";
+	}
+	spotify.search({ type: "track", query: param1 }, function(err, data) {
+		//console.log(param1);
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+ 
+    //console.log(JSON.stringify(data, null, 2));
+
+    var reference = data.tracks.items[0];
+    var artist = reference.album.artists[0].name;
+    var song = reference.name;
+    var preview = reference.preview_url;
+    var album = reference.album.name;
+
+    console.log("-----------------------------------------------------------------------");
+    console.log("Artist: ", artist);
+    console.log("Song: ", song);
+    console.log("Preview Link: ", preview);
+    console.log("Album: ", album);
+    console.log("=======================================================================");
+
+ 
+	// The song's name
+	// A preview link of the song from Spotify
+	// The album that the song is from
+});
+}
