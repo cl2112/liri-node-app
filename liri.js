@@ -3,6 +3,7 @@ const keys = require("./keys.js");
 const Twitter = require("twitter");
 const spotify = require("spotify");
 const request = require("request");
+const fs = require("fs");
 
 // Input Variables
 var command = process.argv[2];
@@ -157,3 +158,14 @@ function movieThis(param1) {
  		}
 	});
 };
+
+function random() {
+	var textInputArray = [];
+	fs.readFile("random.txt", "utf8", function(err, data){
+		if (err) throw err;
+
+		textInputArray = data.split(",");
+	});
+
+	console.log(textInputArray);
+}	
