@@ -11,19 +11,16 @@ var command = process.argv[2];
 var totalString = "";
 
 for ( var i = 3; i < process.argv.length; i++ ) {
-	//console.log(i, process.argv.length);
 	if ( i === process.argv.length - 1) {
 		totalString += process.argv[i];
-		//console.log(totalString);
 	} else {
 		totalString += process.argv[i] + " ";
-		//console.log(totalString);
 	};
 };
 
 var param1 = totalString.replace(/ /g, "-");
 
-console.log(param1);
+
 
 // Twitter Variables
 const consumerKey = keys.twitterKeys.consumer_key;
@@ -62,12 +59,6 @@ function parseCommand() {
 }
 
 
-
-
-
-
-
-
 function myTweets() {
 	client.get('statuses/home_timeline', function(error, tweets, response) {
   		if(error) throw error;
@@ -81,8 +72,6 @@ function myTweets() {
 			console.log(text);
 			console.log("===============================================================");
   		}  
-	//console.log(tweets);  // The favorites. 
-	//console.log(response);  // Raw response object. 
 	});
 };
 
@@ -93,13 +82,11 @@ function spotifyThis(param1) {
 		param1 = "The Sign Ace of Base";
 	};
 	spotify.search({ type: "track", query: param1 }, function(err, data) {
-		//console.log(param1);
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
     };
  
-    //console.log(JSON.stringify(data, null, 2));
 
     var reference = data.tracks.items[0];
     var artist = reference.album.artists[0].name;
@@ -170,8 +157,6 @@ function random() {
 
 		textInputArray = data.split(",");
 		
-		//console.log("inside", textInputArray);
-
 		command = textInputArray[0];
 		param1 = textInputArray[1];
 
