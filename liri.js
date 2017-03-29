@@ -6,9 +6,23 @@ const request = require("request");
 
 // Input Variables
 var command = process.argv[2];
-var param1 = process.argv[3];
-var param2 = process.argv[4];
 
+var totalString = "";
+
+for ( var i = 3; i < process.argv.length; i++ ) {
+	//console.log(i, process.argv.length);
+	if ( i === process.argv.length - 1) {
+		totalString += process.argv[i];
+		//console.log(totalString);
+	} else {
+		totalString += process.argv[i] + " ";
+		//console.log(totalString);
+	};
+};
+
+var param1 = totalString.replace(/ /g, "-");
+
+console.log(param1);
 
 // Twitter Variables
 const consumerKey = keys.twitterKeys.consumer_key;
@@ -114,7 +128,7 @@ function movieThis(param1) {
 
 		if (!error && response.statusCode === 200) {
 
-    		//console.log(JSON.parse(body, null, 2));
+    		console.log(JSON.parse(body, null, 2));
     		var data = JSON.parse(body);
     		var rottenBaseURL = "https://www.rottentomatoes.com/m/"
 
@@ -126,7 +140,8 @@ function movieThis(param1) {
     		var plot = data.Plot;
     		var actors = data.Actors;
     		var rottenRating = data.Ratings[1].Value;
-    		var rottenURL = rottenBaseURL + title;
+    		var parsedTitle = title.replace(/ /g, "_");
+    		var rottenURL = rottenBaseURL + parsedTitle;
 
     		console.log("-------------------------------------------------------------------");
     		console.log("Title: ", title);
