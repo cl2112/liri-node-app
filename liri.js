@@ -10,15 +10,22 @@ var command = process.argv[2];
 
 var totalString = "";
 
-for ( var i = 3; i < process.argv.length; i++ ) {
-	if ( i === process.argv.length - 1) {
-		totalString += process.argv[i];
-	} else {
-		totalString += process.argv[i] + " ";
+var param1;
+
+if (process.argv[3] !== undefined){
+	for ( var i = 3; i < process.argv.length; i++ ) {
+		if ( i === process.argv.length - 1) {
+			totalString += process.argv[i];
+		} else {
+			totalString += process.argv[i] + " ";
+		};
 	};
+	param1 = totalString.replace(/ /g, "-");
+} else {
+	param1 = undefined;
 };
 
-var param1 = totalString.replace(/ /g, "-");
+
 
 
 
@@ -78,7 +85,7 @@ function myTweets() {
 
 
 function spotifyThis(param1) {
-	if (param1 === undefined){
+	if (param1 == undefined){
 		param1 = "The Sign Ace of Base";
 	};
 	spotify.search({ type: "track", query: param1 }, function(err, data) {
@@ -106,9 +113,13 @@ function spotifyThis(param1) {
 
 function movieThis(param1) {
 
-	if (param1 === undefined) {
-		param1 = "Mr.Nobody";
+	console.log("before",param1);
+
+	if (param1 == undefined) {
+		param1 = "Mr.-Nobody";
 	};
+
+	console.log("after",param1);
 
 	var endPoint = "http://www.omdbapi.com/?";
 	var movieQuery = "&t=" + param1;
@@ -121,7 +132,7 @@ function movieThis(param1) {
 
 		if (!error && response.statusCode === 200) {
 
-    		console.log(JSON.parse(body, null, 2));
+    		//console.log(JSON.parse(body, null, 2));
     		var data = JSON.parse(body);
     		var rottenBaseURL = "https://www.rottentomatoes.com/m/"
 
