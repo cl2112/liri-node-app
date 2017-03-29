@@ -39,24 +39,29 @@ var client = new Twitter({
 });
 
 
+function parseCommand() {
 
-switch (command) {
-	case "my-tweets":
-		myTweets();
-		break;
-	case "spotify-this-song":
-		spotifyThis(param1);
-		break;
-	case "movie-this":
-		movieThis(param1);
-		break;
-	case "do-what-it-says":
-		random();
-		break;
-	default:
-		console.log("nothing entered or there was a spelling error.");
-		break;
+	switch (command) {
+		case "my-tweets":
+			myTweets();
+			break;
+		case "spotify-this-song":
+			spotifyThis(param1);
+			break;
+		case "movie-this":
+			movieThis(param1);
+			break;
+		case "do-what-it-says":
+			random();
+			break;
+		default:
+			console.log("nothing entered or there was a spelling error.");
+			break;
+	}
+
 }
+
+
 
 
 
@@ -160,12 +165,23 @@ function movieThis(param1) {
 };
 
 function random() {
-	var textInputArray = [];
 	fs.readFile("random.txt", "utf8", function(err, data){
 		if (err) throw err;
 
 		textInputArray = data.split(",");
-	});
+		
+		//console.log("inside", textInputArray);
 
-	console.log(textInputArray);
+		command = textInputArray[0];
+		param1 = textInputArray[1];
+
+		parseCommand();
+	});
 }	
+
+
+
+
+
+
+parseCommand();
