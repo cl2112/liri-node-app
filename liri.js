@@ -22,7 +22,7 @@ if (process.argv[3] !== undefined){
 	};
 	param1 = totalString.replace(/ /g, "-");
 } else {
-	param1 = undefined;
+	param1 = "noInput";
 };
 
 
@@ -85,7 +85,7 @@ function myTweets() {
 
 
 function spotifyThis(param1) {
-	if (param1 == undefined){
+	if (param1 == "noInput"){
 		param1 = "The Sign Ace of Base";
 	};
 	spotify.search({ type: "track", query: param1 }, function(err, data) {
@@ -115,7 +115,7 @@ function movieThis(param1) {
 
 	console.log("before",param1);
 
-	if (param1 == undefined) {
+	if (param1 == "noInput") {
 		param1 = "Mr.-Nobody";
 	};
 
@@ -176,6 +176,11 @@ function random() {
 }	
 
 
+function logToText(message) {
+	fs.appendFile("log.txt", message, "utf8", function (err) {
+		if (err) throw err;
+	});
+};
 
 
 
