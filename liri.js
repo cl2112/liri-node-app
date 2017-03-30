@@ -1,17 +1,26 @@
+//---------------------------------------------------------------------------------
 // Requires
+
 const keys = require("./keys.js");
 const Twitter = require("twitter");
 const spotify = require("spotify");
 const request = require("request");
 const fs = require("fs");
 
+//=================================================================================
+
+
+
+//---------------------------------------------------------------------------------
 // Input Variables
+
 var command = process.argv[2];
 
 var totalString = "";
 
-var param1;
+var param;
 
+// If there was no parameter input, then set var param to no input.
 if (process.argv[3] !== undefined){
 	for ( var i = 3; i < process.argv.length; i++ ) {
 		if ( i === process.argv.length - 1) {
@@ -20,16 +29,18 @@ if (process.argv[3] !== undefined){
 			totalString += process.argv[i] + " ";
 		};
 	};
-	param1 = totalString.replace(/ /g, "-");
+	param = totalString.replace(/ /g, "-");
 } else {
-	param1 = "noInput";
+	param = "noInput";
 };
 
+//=================================================================================
 
 
 
-
+//---------------------------------------------------------------------------------
 // Twitter Variables
+
 const consumerKey = keys.twitterKeys.consumer_key;
 const consumerSecret = keys.twitterKeys.consumer_secret;
 const accessKey = keys.twitterKeys.access_token_key;
@@ -42,32 +53,43 @@ var client = new Twitter({
   access_token_secret: accessSecret
 });
 
+//==================================================================================
+
+
+
+//----------------------------------------------------------------------------------
+// Switch case testing the command variable. 
 
 function parseCommand() {
 
 	logToText("Entered Command: " + command);
-	logToText("Parameter: " + param1);
+	logToText("Parameter: " + param);
 
 	switch (command) {
 		case "my-tweets":
 			myTweets();
 			break;
 		case "spotify-this-song":
-			spotifyThis(param1);
+			spotifyThis(param);
 			break;
 		case "movie-this":
-			movieThis(param1);
+			movieThis(param);
 			break;
 		case "do-what-it-says":
 			random();
 			break;
 		default:
-			console.log("nothing entered or there was a spelling error.");
+			console.log("Nothing entered or there was a spelling error.");
 			break;
-	}
+	};
+};
 
-}
+//===================================================================================
 
+
+
+//-----------------------------------------------------------------------------------
+// Uses the node twitter package to return the last 20 tweets from the user.
 
 function myTweets() {
 	client.get('statuses/home_timeline', function(error, tweets, response) {
@@ -87,17 +109,22 @@ function myTweets() {
 			logToText(name);
 			logToText(text);
 			logToText("===============================================================");
-  		}  
+  		};
 	});
 };
 
+//======================================================================================
 
 
-function spotifyThis(param1) {
-	if (param1 == "noInput"){
-		param1 = "The Sign Ace of Base";
+
+//--------------------------------------------------------------------------------------
+// Uses the node Spotify package to query the spotify API for a song.
+
+function spotifyThis(param) {
+	if (param == "noInput"){
+		param = "The Sign Ace of Base";
 	};
-	spotify.search({ type: "track", query: param1 }, function(err, data) {
+	spotify.search({ type: "track", query: param }, function(err, data) {
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
@@ -124,21 +151,28 @@ function spotifyThis(param1) {
     logToText("Album: " + album);
     logToText("=======================================================================");
 
-});
+	});
 };
 
-function movieThis(param1) {
+//=======================================================================================
 
-	console.log("before",param1);
 
-	if (param1 == "noInput") {
-		param1 = "Mr.-Nobody";
+
+//---------------------------------------------------------------------------------------
+// Uses the node request package to query the OMDB API for a movie title.
+
+function movieThis(param) {
+
+	console.log("before",param);
+
+	if (param == "noInput") {
+		param = "Mr.-Nobody";
 	};
 
-	console.log("after",param1);
+	console.log("after",param);
 
 	var endPoint = "http://www.omdbapi.com/?";
-	var movieQuery = "&t=" + param1;
+	var movieQuery = "&t=" + param;
 	var typeQuery = "&type=movie";
 	var responseFormat = "&r=json";
 
@@ -190,6 +224,13 @@ function movieThis(param1) {
 	});
 };
 
+//=======================================================================================
+
+
+
+//---------------------------------------------------------------------------------------
+// Uses the node File System to read the text from a file and use it as a command and parameter.
+
 function random() {
 	fs.readFile("random.txt", "utf8", function(err, data){
 		if (err) throw err;
@@ -197,12 +238,18 @@ function random() {
 		textInputArray = data.split(",");
 		
 		command = textInputArray[0];
-		param1 = textInputArray[1];
+		param = textInputArray[1];
 
 		parseCommand();
 	});
-}	
+};
 
+//==============================================================================================	
+
+
+
+//---------------------------------------------------------------------------------------------
+// Uses node File System to write to a file called log.text.
 
 function logToText(message) {
 	fs.appendFileSync("log.txt", message + "\n", "utf8", function (err) {
@@ -210,7 +257,9 @@ function logToText(message) {
 	});
 };
 
+//=============================================================================================
 
 
 
+// Start of the program.
 parseCommand();
