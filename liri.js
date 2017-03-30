@@ -45,6 +45,9 @@ var client = new Twitter({
 
 function parseCommand() {
 
+	logToText("Entered Command: " + command);
+	logToText("Parameter: " + param1);
+
 	switch (command) {
 		case "my-tweets":
 			myTweets();
@@ -78,6 +81,12 @@ function myTweets() {
 			console.log(name);
 			console.log(text);
 			console.log("===============================================================");
+
+			logToText("  ");
+			logToText("---------------------------------------------------------------");
+			logToText(name);
+			logToText(text);
+			logToText("===============================================================");
   		}  
 	});
 };
@@ -102,11 +111,18 @@ function spotifyThis(param1) {
     var album = reference.album.name;
 
     console.log("-----------------------------------------------------------------------");
-    console.log("Artist: ", artist);
-    console.log("Song: ", song);
-    console.log("Preview Link: ", preview);
-    console.log("Album: ", album);
+    console.log("Artist: " + artist);
+    console.log("Song: " + song);
+    console.log("Preview Link: " + preview);
+    console.log("Album: " + album);
     console.log("=======================================================================");
+
+    logToText("-----------------------------------------------------------------------");
+    logToText("Artist: " + artist);
+    logToText("Song: " + song);
+    logToText("Preview Link: " + preview);
+    logToText("Album: " + album);
+    logToText("=======================================================================");
 
 });
 };
@@ -148,16 +164,28 @@ function movieThis(param1) {
     		var rottenURL = rottenBaseURL + parsedTitle;
 
     		console.log("-------------------------------------------------------------------");
-    		console.log("Title: ", title);
-    		console.log("Year: ", year);
-    		console.log("IMDB Rating: ", imdbRating);
-    		console.log("Country(s): ", country);
-    		console.log("Language(s): ", language);
-    		console.log("Plot: ", plot);
-    		console.log("Actors: ", actors);
-    		console.log("Rotten Tomatoes Rating: ", rottenRating);
-    		console.log("Rotten Tomatoes URL: ", rottenURL);
+    		console.log("Title: " + title);
+    		console.log("Year: " + year);
+    		console.log("IMDB Rating: " + imdbRating);
+    		console.log("Country(s): " + country);
+    		console.log("Language(s): " + language);
+    		console.log("Plot: " + plot);
+    		console.log("Actors: " + actors);
+    		console.log("Rotten Tomatoes Rating: " + rottenRating);
+    		console.log("Rotten Tomatoes URL: " + rottenURL);
     		console.log("===================================================================");
+
+    		logToText("-------------------------------------------------------------------");
+    		logToText("Title: " + title);
+    		logToText("Year: " + year);
+    		logToText("IMDB Rating: " + imdbRating);
+    		logToText("Country(s): " + country);
+    		logToText("Language(s): " + language);
+    		logToText("Plot: " + plot);
+    		logToText("Actors: " + actors);
+    		logToText("Rotten Tomatoes Rating: " + rottenRating);
+    		logToText("Rotten Tomatoes URL: " + rottenURL);
+    		logToText("===================================================================");
  		}
 	});
 };
@@ -177,7 +205,7 @@ function random() {
 
 
 function logToText(message) {
-	fs.appendFile("log.txt", message, "utf8", function (err) {
+	fs.appendFileSync("log.txt", message + "\n", "utf8", function (err) {
 		if (err) throw err;
 	});
 };
