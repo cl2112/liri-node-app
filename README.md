@@ -11,7 +11,7 @@ To access the full functionality all you have to do is:
 	
 		node liri.js [command] [parameter]
 
-- In place of the [command] block, you can type in the action you would like LIRI to execute.
+- In place of the [command] block, you can type in the action you would like LIRI to execute. (with out brackets)
 	
 	- The actions are:
 		
@@ -20,6 +20,11 @@ To access the full functionality all you have to do is:
 
 		- spotify-this-song [parameter]
 			- searches Spotify for a song and returns it's information
+			- in place of the [paramerter] block, you can typein which ever song you would like to search for
 
 		- movie-this [parameter]
-			- 
+			- searches OMDB for a song and returns it's information
+			- in place of the [parameter] block, you can type in the name of the movie you would like to search for
+
+		- do-what-it-says
+			- selects a random [command] and [parameter]

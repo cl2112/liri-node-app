@@ -104,11 +104,11 @@ function myTweets() {
 			console.log(text);
 			console.log("===============================================================");
 
-			logToText("  ");
-			logToText("---------------------------------------------------------------");
-			logToText(name);
-			logToText(text);
-			logToText("===============================================================");
+			logToText("  " + "\n" +
+			"---------------------------------------------------------------" + "\n" +
+			name + "\n" +
+			text + "\n" +
+			"===============================================================");
   		};
 	});
 };
@@ -144,12 +144,12 @@ function spotifyThis(param) {
     console.log("Album: " + album);
     console.log("=======================================================================");
 
-    logToText("-----------------------------------------------------------------------");
-    logToText("Artist: " + artist);
-    logToText("Song: " + song);
-    logToText("Preview Link: " + preview);
-    logToText("Album: " + album);
-    logToText("=======================================================================");
+    logToText("-----------------------------------------------------------------------" + "\n" +
+    "Artist: " + artist + "\n" +
+    "Song: " + song + "\n" +
+    "Preview Link: " + preview + "\n" +
+    "Album: " + album + "\n" +
+    "=======================================================================");
 
 	});
 };
@@ -209,17 +209,17 @@ function movieThis(param) {
     		console.log("Rotten Tomatoes URL: " + rottenURL);
     		console.log("===================================================================");
 
-    		logToText("-------------------------------------------------------------------");
-    		logToText("Title: " + title);
-    		logToText("Year: " + year);
-    		logToText("IMDB Rating: " + imdbRating);
-    		logToText("Country(s): " + country);
-    		logToText("Language(s): " + language);
-    		logToText("Plot: " + plot);
-    		logToText("Actors: " + actors);
-    		logToText("Rotten Tomatoes Rating: " + rottenRating);
-    		logToText("Rotten Tomatoes URL: " + rottenURL);
-    		logToText("===================================================================");
+    		logToText("-------------------------------------------------------------------\n" + 
+    		"Title: " + title + "\n" +
+    		"Year: " + year + "\n" +
+    		"IMDB Rating: " + imdbRating + "\n" +
+    		"Country(s): " + country + "\n" +
+    		"Language(s): " + language + "\n" +
+    		"Plot: " + plot + "\n" +
+    		"Actors: " + actors + "\n" +
+    		"Rotten Tomatoes Rating: " + rottenRating + "\n" +
+    		"Rotten Tomatoes URL: " + rottenURL + "\n" +
+    		"===================================================================" + "\n");
  		}
 	});
 };
@@ -252,7 +252,7 @@ function random() {
 // Uses node File System to write to a file called log.text.
 
 function logToText(message) {
-	fs.appendFileSync("log.txt", message + "\n", "utf8", function (err) {
+	fs.appendFile("log.txt", message + "\n", "utf8", function (err) {
 		if (err) throw err;
 	});
 };
