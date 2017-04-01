@@ -4,6 +4,18 @@ LIRI = Language Interpretation and Recognition Interface;
 
 LIRI can find the info for a song using spotify's API, return the last 20 statuses from twitter using the twitter API, and show you the all sorts of information about any movie! (as long as it's in the OMDB of course)
 
+Before you can do any of that though, you need to install some node packages that LIRI uses.
+	- To install the packages, simply enter into your CLI:
+
+		npm install
+
+	After a few moments, you'll have everything you need to interact with LIRI.
+
+	- The node packages used are: 
+		- request
+		- spotify
+		- twitter
+
 To access the full functionality all you have to do is:
 - using the CLI, navigate to the directory where liri.js is stored
 
