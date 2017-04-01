@@ -9,12 +9,12 @@ Before you can do any of that though, you need to install some node packages tha
 
 		npm install
 
-	After a few moments, you'll have everything you need to interact with LIRI.
+After a few moments, you'll have everything you need to interact with LIRI.
 
-	- The node packages used are: 
-		- request
-		- spotify
-		- twitter
+- The node packages used are: 
+	- request
+	- spotify
+	- twitter
 
 To access the full functionality all you have to do is:
 - using the CLI, navigate to the directory where liri.js is stored
