@@ -20,7 +20,7 @@ After a few moments, you'll have everything you need to interact with LIRI.
 To access the full functionality all you have to do is:
 - using the CLI, navigate to the directory where liri.js is stored
 
-- type in: 
+- enter in: 
 	
 		node liri.js [command] [parameter]
 
